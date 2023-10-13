@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let a=34;
+        console.log(a);
+        let obja={
+            r:34,
+            m:64,
+            func:function myfunc(number){
+                console.log("The number is"+ number)
+            }
+        }
+        document.addEventListener("click",function(){
+            console.log("clicked");
+            let conf=confirm("Are you sure?");
+            console.log(conf);
+        })
+
+    //    let arr=[34,21,23];
+    //     console.log(this);
+    //    function myfunc1(num){
+    //   console.log(this);
+    // }
+    let mobj={
+        myfunc:(number)=>{
+             console.log("the number is"+this);
+        }
+    }
+    mobj.myfunc();
+    console.log(mobj.a);
+    </script>
+</head> 
+<body>
+    I am learning java script
+</body>
+</html>
