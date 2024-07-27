@@ -5,7 +5,7 @@ const { configDotenv } = require('dotenv');
 
 const app = express();
 app.use(cors()); // Enable CORS for all origins
-configDotenv({path:secrets.env})
+configDotenv({path:'secrets.env'})
 const port = process.env.PORT || 80;
 
 app.use(bodyParser.json());
