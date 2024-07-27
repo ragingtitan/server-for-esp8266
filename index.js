@@ -1,31 +1,25 @@
 const express = require('express');
 const cors = require('cors'); // Import cors
-
-
 const bodyParser = require('body-parser');
+const { configDotenv } = require('dotenv');
 
 const app = express();
 app.use(cors()); // Enable CORS for all origins
-const port = 80;
+configDotenv({path:secrets.env})
+const port = process.env.PORT || 80;
 
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
-  console.log('Motion detected!');
-  console.log(req.body);
-  res.sendStatus(205);
-});
-app.get('/', (req, res) => {
-  console.log('Motion detected!');
-  console.log(req.body);
+  console.log('POST request received');
+  console.log('Body:', req.body);
   res.sendStatus(205);
 });
 
-function captureImage() {
-  // Use OpenCV Python code (see below) to capture
-  // and save an image from the camera
-  // ... (execute Python script using child_process or similar)
-}
+app.get('/', (req, res) => {
+  console.log('GET request received');
+  res.send('Hello from the server!');
+});
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server listening on port ${port}`);
