@@ -1,41 +1,27 @@
-const express = require('express');
-const cors = require('cors'); // Import cors
-const bodyParser = require('body-parser');
-const { configDotenv } = require('dotenv');
 const { exec } = require('child_process');
+const express = require('express');
 
 const app = express();
 
-configDotenv({ path: 'secrets.env' });
-const port = process.env.PORT || 80;
-
-app.use(cors());
-app.use(bodyParser.json());
-
-app.post('/', (req, res) => {
-  console.log('POST request received');
-  console.log('Body:', req.body);
-
-  // Run the Python script to capture an image
-  exec('./VideoDetection.py', (error, stdout, stderr) => {
+app.get('/', (req, res) => {
+  exec('python VideoDetection.py', (error, stdout, stderr) => {
+    console.log('Executing script...');
+    console.log('Error:', error);
+    console.log('Stdout:', stdout);
+    console.log('Stderr:', stderr);
+    
     if (error) {
-      console.error(`Error executing script: ${error}`);
-      return res.status(500).send('Error capturing image');
+      res.status(500).send(`Error executing script: ${error.message}`);
+      return;
     }
     if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
+      res.status(500).send(`Script stderr: ${stderr}`);
+      return;
     }
-    console.log(`Script output: ${stdout}`);
-    res.send('Image captured!');
+    res.send(`Script executed successfully! Output: ${stdout}`);
   });
 });
 
-app.get('/', (req, res) => {
-  console.log('GET request received');
-  res.send('Hello from the server!');
-});
-
-console.log(port)
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(80, () => {
+  console.log('Server listening on port 3000!');
 });
