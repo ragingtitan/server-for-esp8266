@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { configDotenv } = require('dotenv');
 
 const app = express();
-app.use(cors()); // Enable CORS for all origins
+
 configDotenv({path:'secrets.env'})
 const port = process.env.PORT || 80;
 
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.post('/', (req, res) => {
   console.log('POST request received');
   console.log('Body:', req.body);
-  res.sendStatus(205);
+  res.send('Hello from the server!');
 });
 
 app.get('/', (req, res) => {
