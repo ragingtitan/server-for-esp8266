@@ -17,7 +17,7 @@ app.post('/', (req, res) => {
   console.log('Body:', req.body);
 
   // Run the Python script to capture an image
-  exec('VideoDetection.py', (error, stdout, stderr) => {
+  exec('./VideoDetection.py', (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing script: ${error}`);
       return res.status(500).send('Error capturing image');
