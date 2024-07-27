@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  exec('python VideoDetection.py', (error, stdout, stderr) => {
+  exec('python Video.py', (error, stdout, stderr) => {
     console.log('Executing script...');
     console.log('Error:', error);
     console.log('Stdout:', stdout);
